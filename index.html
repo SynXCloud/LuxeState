@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUXESTATE — Premium Properties</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!-- PAGE LOADER -->
+<div class="page-loader" id="pageLoader">
+  <div class="loader-logo">LUXESTATE</div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">LUXE<span>ESTATE</span></div>
+  <ul class="nav-links">
+    <li><a href="#listings">Properties</a></li>
+    <li><a href="#smart-match">Smart Match</a></li>
+    <li><a href="#emi-section">EMI Calc</a></li>
+    <li><a href="#builders">Builders</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+      <div class="theme-dot"></div>
+    </button>
+    <button class="nav-cta" onclick="openChat()">Talk to Us</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <div class="badge-dot"></div>
+      Premium Real Estate Since 2010
+    </div>
+    <h1 class="hero-title">Find Your<br><em>Perfect</em><br>Residence</h1>
+    <p class="hero-subtitle">Curated luxury properties across India's most coveted addresses. Where exceptional living meets unparalleled design.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('listings').scrollIntoView({behavior:'smooth'})">Explore Properties</button>
+      <button class="btn-outline" onclick="document.getElementById('smart-match').scrollIntoView({behavior:'smooth'})">Smart Match →</button>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num" data-count="1200">0</div><div class="stat-label">Properties</div></div>
+    <div class="stat"><div class="stat-num" data-count="48">0</div><div class="stat-label">Cities</div></div>
+    <div class="stat"><div class="stat-num" data-count="3800">0</div><div class="stat-label">Happy Families</div></div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Scroll to Explore
+  </div>
+</section>
+
+<!-- SMART MATCH -->
+<section id="smart-match">
+  <div class="section-header">
+    <div>
+      <div class="section-tag">AI-Powered</div>
+      <h2 class="section-title">Smart Property<br>Match</h2>
+    </div>
+    <p class="section-desc">Answer 4 quick questions and we'll instantly surface properties tailored exactly to your lifestyle and budget.</p>
+  </div>
+  <div class="match-wizard">
+    <div class="wizard-progress">
+      <div class="prog-step active" id="ps1"></div>
+      <div class="prog-step" id="ps2"></div>
+      <div class="prog-step" id="ps3"></div>
+      <div class="prog-step" id="ps4"></div>
+    </div>
+    <!-- Step 1 -->
+    <div class="wizard-step active" id="ws1">
+      <p class="wizard-q">01 — What's your purpose?</p>
+      <div class="wizard-options">
+        <button class="wizard-opt" onclick="selectOpt(this,'purpose','investment')">📈 Investment</button>
+        <button class="wizard-opt" onclick="selectOpt(this,'purpose','self-use')">🏠 Self Use</button>
+        <button class="wizard-opt" onclick="selectOpt(this,'purpose','holiday-home')">🌊 Holiday Home</button>
+        <button class="wizard-opt" onclick="selectOpt(this,'purpose','rental')">🔑 Rental Income</button>
+      </div>
+      <div class="wizard-nav"><button class="btn-primary" onclick="wizNext(2)">Next →</button></div>
+    </div>
+    <!-- Step 2 -->
+    <div class="wizard-step" id="ws2">
+      <p class="wizard-q">02 — What's your budget range?</p>
+      <div class="wizard-options">
+        <button class="wizard-opt" onclick="selectOpt(this,'budget','under-50')">Under ₹50L</button>
+        <button class="wizard-opt" onclick="selectOpt(this,'budget','50-1cr')">₹50L – 1Cr</button>
+        <button class="wizard-opt" onclick="selectOpt(this,'budget','1-3cr')">₹1Cr – 3Cr</button>
+        <button class="wizard-opt" onclick="selectOpt(this,'budget','above-3cr')">Above ₹3Cr</button>
+      </div>
+      <div class="wizard-nav">
+        <button class="btn-outline" onclick="wizNext(1)">← Back</button>
+        <button class="btn-primary" onclick="wizNext(3)">Next →</button>
+      </div>
+    </div>
+    <!-- Step 3 -->
+    <div class="wizard-step" id="ws3">
+      <p class="wizard-q">03 — Preferred configuration?</p>
+      <div class="wizard-options">
+        <button class="wizard-opt" onclick="selectOpt(this,'bhk','1bhk')">1 BHK</button>
+        <button class="wizard-opt" onclick="selectOpt(this,'bhk','2bhk')">2 BHK</button>
+        <button class="wizard-opt" onclick="selectOpt(this,'bhk','3bhk')">3 BHK</button>
+        <button class="wizard-opt" onclick="selectOpt(this,'bhk','4+bhk')">4+ BHK / Villa</button>
+      </div>
+      <div class="wizard-nav">
+        <button class="btn-outline" onclick="wizNext(2)">← Back</button>
+        <button class="btn-primary" onclick="wizNext(4)">Next →</button>
+      </div>
+    </div>
+    <!-- Step 4 -->
+    <div class="wizard-step" id="ws4">
+      <p class="wizard-q">04 — What matters most?</p>
+      <div class="wizard-options">
+        <button class="wizard-opt" onclick="selectOpt(this,'priority','location')">📍 Prime Location</button>
+        <button class="wizard-opt" onclick="selectOpt(this,'priority','amenities')">🏊 Amenities</button>
+        <button class="wizard-opt" onclick="selectOpt(this,'priority','value')">💎 Value for Money</button>
+        <button class="wizard-opt" onclick="selectOpt(this,'priority','ready')">🔑 Ready to Move</button>
+      </div>
+      <div class="wizard-nav">
+        <button class="btn-outline" onclick="wizNext(3)">← Back</button>
+        <button class="btn-primary" onclick="runMatch()">Find Matches ✦</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LISTINGS -->
+<section id="listings">
+  <div class="section-header">
+    <div>
+      <div class="section-tag">Curated Collection</div>
+      <h2 class="section-title">Featured<br>Properties</h2>
+    </div>
+    <p class="section-desc">Every listing is personally verified by our luxury property consultants.</p>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <div class="filter-group">
+      <label class="filter-label">Location</label>
+      <select class="filter-select" id="fLocation">
+        <option value="">All Cities</option>
+        <option>Mumbai</option><option>Delhi</option><option>Bangalore</option>
+        <option>Pune</option><option>Hyderabad</option><option>Chennai</option><option>Kolkata</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label class="filter-label">Configuration</label>
+      <select class="filter-select" id="fBhk">
+        <option value="">Any BHK</option>
+        <option>1 BHK</option><option>2 BHK</option><option>3 BHK</option><option>4+ BHK</option><option>Villa</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label class="filter-label">Min Price (₹Cr)</label>
+      <input class="filter-input" id="fMinPrice" type="number" placeholder="0" step="0.1">
+    </div>
+    <div class="filter-group">
+      <label class="filter-label">Max Price (₹Cr)</label>
+      <input class="filter-input" id="fMaxPrice" type="number" placeholder="Any" step="0.1">
+    </div>
+    <div class="filter-group">
+      <label class="filter-label">Amenity</label>
+      <select class="filter-select" id="fAmenity">
+        <option value="">Any</option>
+        <option>Pool</option><option>Gym</option><option>Clubhouse</option><option>Garden</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label class="filter-label">Status</label>
+      <select class="filter-select" id="fStatus">
+        <option value="">Any</option>
+        <option>Ready to Move</option><option>Under Construction</option><option>New Launch</option>
+      </select>
+    </div>
+    <button class="filter-btn" onclick="applyFilters()">Apply Filters</button>
+    <button class="filter-btn" style="background:var(--surface2);color:var(--muted);border:1px solid var(--border)" onclick="resetFilters()">Reset</button>
+  </div>
+
+  <div class="listings-header">
+    <div class="listings-count" id="listingsCount">Showing 12 properties</div>
+    <div class="view-toggles">
+      <button class="view-btn active" id="vGrid" onclick="setView('grid')" title="Grid">⊞</button>
+      <button class="view-btn" id="vList" onclick="setView('list')" title="List">☰</button>
+    </div>
+  </div>
+
+  <div class="property-grid" id="propertyGrid"></div>
+</section>
+
+<!-- EMI CALCULATOR -->
+<section id="emi-section">
+  <div class="section-header">
+    <div>
+      <div class="section-tag">Financial Planning</div>
+      <h2 class="section-title">EMI<br>Calculator</h2>
+    </div>
+    <p class="section-desc">Calculate your monthly installments instantly. Plan smarter, invest wiser.</p>
+  </div>
+  <div class="emi-wrap">
+    <div class="emi-form">
+      <label class="emi-label">Loan Amount (₹)</label>
+      <input class="emi-input" id="emiAmount" type="number" value="5000000" oninput="calcEMI()">
+      <input class="emi-slider" id="emiAmtSlider" type="range" min="500000" max="50000000" step="100000" value="5000000" oninput="document.getElementById('emiAmount').value=this.value;calcEMI()">
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:24px"><span>₹5L</span><span>₹5Cr</span></div>
+
+      <label class="emi-label">Interest Rate (% per annum)</label>
+      <input class="emi-input" id="emiRate" type="number" value="8.5" step="0.1" oninput="calcEMI()">
+      <input class="emi-slider" id="emiRateSlider" type="range" min="5" max="20" step="0.1" value="8.5" oninput="document.getElementById('emiRate').value=this.value;calcEMI()">
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:24px"><span>5%</span><span>20%</span></div>
+
+      <label class="emi-label">Loan Tenure (Years)</label>
+      <input class="emi-input" id="emiTenure" type="number" value="20" oninput="calcEMI()">
+      <input class="emi-slider" id="emiTenureSlider" type="range" min="1" max="30" step="1" value="20" oninput="document.getElementById('emiTenure').value=this.value;calcEMI()">
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted)"><span>1 yr</span><span>30 yrs</span></div>
+    </div>
+    <div class="emi-result">
+      <div class="emi-monthly" id="emiMonthly">₹0</div>
+      <div class="emi-monthly-label">Monthly EMI</div>
+      <div class="emi-breakdown">
+        <div class="emi-row"><span class="emi-row-label">Principal Amount</span><span class="emi-row-val" id="emiPrincipal">—</span></div>
+        <div class="emi-row"><span class="emi-row-label">Total Interest</span><span class="emi-row-val" id="emiInterest">—</span></div>
+        <div class="emi-row"><span class="emi-row-label">Total Payment</span><span class="emi-row-val" id="emiTotal">—</span></div>
+        <div class="emi-row"><span class="emi-row-label">Loan Tenure</span><span class="emi-row-val" id="emiTenureDisp">—</span></div>
+      </div>
+      <div style="margin-top:32px">
+        <canvas id="emiChart" width="260" height="260"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUILDERS -->
+<section id="builders">
+  <div class="section-header">
+    <div>
+      <div class="section-tag">Our Partners</div>
+      <h2 class="section-title">Trusted<br>Builders</h2>
+    </div>
+    <p class="section-desc">Partnered with India's most reputable developers delivering landmark projects.</p>
+  </div>
+  <div class="builders-grid" id="buildersGrid"></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">LUXESTATE</div>
+      <p class="footer-about">India's premier luxury real estate platform connecting discerning buyers with exceptional properties across the country's most coveted addresses since 2010.</p>
+    </div>
+    <div>
+      <div class="footer-heading">Properties</div>
+      <ul class="footer-links">
+        <li><a href="#">Apartments</a></li>
+        <li><a href="#">Villas</a></li>
+        <li><a href="#">Penthouses</a></li>
+        <li><a href="#">Commercial</a></li>
+        <li><a href="#">Plots</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Company</div>
+      <ul class="footer-links">
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Legal</div>
+      <ul class="footer-links">
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Use</a></li>
+        <li><a href="#">RERA Info</a></li>
+        <li><a href="#">Disclaimer</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 LUXESTATE. All rights reserved. RERA Reg: MH/12345/2020</span>
+    <span>Made with ♦ for discerning buyers</span>
+  </div>
+</footer>
+
+<!-- PROPERTY MODAL -->
+<div class="modal-overlay" id="propertyModal">
+  <div class="modal" id="modalContent">
+    <div class="modal-close"><button class="close-btn" onclick="closeModal()">✕</button></div>
+    <div id="modalInner"></div>
+  </div>
+</div>
+
+<!-- COMPARE BAR -->
+<div id="compare-bar">
+  <span class="compare-label">Compare</span>
+  <div class="compare-slots" id="compareSlots"></div>
+  <button class="compare-go" onclick="openCompare()">Compare Now</button>
+  <button class="compare-clear" onclick="clearCompare()">Clear</button>
+</div>
+
+<!-- COMPARE MODAL -->
+<div class="compare-modal" id="compareModal">
+  <div class="compare-modal-inner">
+    <div style="text-align:right;margin-bottom:32px">
+      <button class="close-btn" onclick="closeCompareModal()" style="display:inline-flex">✕</button>
+    </div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;margin-bottom:32px">Property Comparison</div>
+    <div class="compare-table" id="compareTable"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast">✦ Added to wishlist</div>
+
+<!-- CHATBOT -->
+<div id="chat-bubble" onclick="openChat()">
+  💬<div class="notif">1</div>
+</div>
+<div id="chatbot">
+  <div class="chat-header">
+    <div class="chat-agent-info">
+      <div class="chat-avatar">🏠</div>
+      <div>
+        <div class="chat-name">Aria — Property Assistant</div>
+        <div class="chat-status">Online</div>
+      </div>
+    </div>
+    <span class="chat-close" onclick="closeChat()">✕</span>
+  </div>
+  <div class="chat-body" id="chatBody"></div>
+  <div class="chat-quick" id="quickReplies"></div>
+  <div class="chat-input-row">
+    <input class="chat-input" id="chatInput" placeholder="Ask about properties..." onkeydown="if(event.key==='Enter')sendChat()">
+    <button class="chat-send" onclick="sendChat()">➤</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
