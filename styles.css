@@ -1006,5 +1006,7 @@ footer{
   #chatbot{width:calc(100vw - 40px);right:20px}
   .filter-bar{padding:16px}
   .property-grid{grid-template-columns:1fr}
+  .list-view .property-card{display:flex;flex-direction:column}
+  .list-view .card-image-wrap{height:220px}
 }
 
